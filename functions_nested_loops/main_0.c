@@ -1,9 +1,11 @@
 #include "main.h"
 
 /**
- * test_isalpha - test _isalpha function
+ * main - check the code.
+ *
+ * Return: Always 0.
  */
-void test_isalpha(void)
+int main(void)
 {
     int r;
 
@@ -16,11 +18,6 @@ void test_isalpha(void)
     r = _isalpha(';');
     _putchar(r + '0');
     _putchar('\n');
-}
-
-int main(void)
-{
-    test_isalpha();
     return (0);
 }
 
