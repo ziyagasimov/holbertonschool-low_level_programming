@@ -9,22 +9,33 @@
 void print_number(int n)
 {
 	int divisor = 1;
+	int digit;
+	int started = 0;
 
 	if (n < 0)
 	{
 		_putchar('-');
-		n = -n;
+		if (n == -2147483648) /* Handle INT_MIN without overflow */
+		{
+			_putchar('2');
+			n = 147483648; /* print the rest after '2' */
+		}
+		else
+			n = -n;
 	}
 
-	/* Find the divisor to extract the leftmost digit */
 	while (n / divisor > 9)
 		divisor *= 10;
 
-	/* Extract and print each digit */
 	while (divisor >= 1)
 	{
-		_putchar((n / divisor) + '0');
-		n = n % divisor;
+		digit = n / divisor;
+		if (digit != 0 || started || divisor == 1)
+		{
+			_putchar(digit + '0');
+			started = 1;
+		}
+		n %= divisor;
 		divisor /= 10;
 	}
 }
