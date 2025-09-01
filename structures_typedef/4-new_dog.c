@@ -1,6 +1,5 @@
 #include "dog.h"
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * new_dog - creates a new dog
@@ -11,43 +10,50 @@
  * Return: pointer to the new dog, or NULL on failure
  *
  * Description: Allocates memory for a new dog_t structure,
- * copies the name and owner strings manually. Returns NULL if any
- * allocation fails.
+ * copies the name and owner strings manually using loops.
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *d;
 	char *name_copy = NULL;
 	char *owner_copy = NULL;
-	size_t name_len, owner_len;
+	int i;
 
 	d = malloc(sizeof(dog_t));
 	if (d == NULL)
 		return (NULL);
 
+	/* Copy name manually */
 	if (name != NULL)
 	{
-		name_len = strlen(name) + 1;
-		name_copy = malloc(name_len);
+		for (i = 0; name[i]; i++)
+			;
+		name_copy = malloc(i + 1);
 		if (name_copy == NULL)
 		{
 			free(d);
 			return (NULL);
 		}
-		strcpy(name_copy, name);
+		for (i = 0; name[i]; i++)
+			name_copy[i] = name[i];
+		name_copy[i] = '\0';
 	}
 
+	/* Copy owner manually */
 	if (owner != NULL)
 	{
-		owner_len = strlen(owner) + 1;
-		owner_copy = malloc(owner_len);
+		for (i = 0; owner[i]; i++)
+			;
+		owner_copy = malloc(i + 1);
 		if (owner_copy == NULL)
 		{
 			free(name_copy);
 			free(d);
 			return (NULL);
 		}
-		strcpy(owner_copy, owner);
+		for (i = 0; owner[i]; i++)
+			owner_copy[i] = owner[i];
+		owner_copy[i] = '\0';
 	}
 
 	d->name = name_copy;
