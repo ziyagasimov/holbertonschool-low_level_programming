@@ -2,7 +2,16 @@
 #include <stdlib.h>
 #include "3-calc.h"
 
-/* Main function */
+/**
+ * main - entry point for simple calculator program
+ * @argc: number of arguments
+ * @argv: array of argument strings
+ *
+ * Description: performs simple arithmetic operations (+, -, *, /, %)
+ *              using function pointers.
+ *
+ * Return: 0 on success, exits with 98, 99, or 100 on error
+ */
 int main(int argc, char *argv[])
 {
 	int (*op_func)(int, int);
