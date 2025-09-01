@@ -2,10 +2,10 @@
 #define DOG_H
 
 /**
- * struct dog - it haqqında məlumat saxlamaq üçün struktur
- * @name: itin adı
- * @age: itin yaşı
- * @owner: sahibinin adı
+ * struct dog - structure to store information about a dog
+ * @name: name of the dog
+ * @age: age of the dog
+ * @owner: name of the owner
  */
 struct dog
 {
@@ -16,7 +16,8 @@ struct dog
 
 typedef struct dog dog_t;
 
-/* Burada prototip əlavə olunmalıdır */
+/* Function prototypes */
 void init_dog(struct dog *d, char *name, float age, char *owner);
+void print_dog(struct dog *d);
 
 #endif /* DOG_H */
