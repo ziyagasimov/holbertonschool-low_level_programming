@@ -20,23 +20,17 @@ struct dog
 typedef struct dog dog_t;
 
 /* Function prototypes */
+void init_dog(dog_t *d, char *name, float age, char *owner);
+void print_dog(dog_t *d);
 
 /**
- * init_dog - initializes a struct dog variable
- * @d: pointer to the struct dog to initialize
+ * new_dog - creates a new dog
  * @name: name of the dog
  * @age: age of the dog
  * @owner: name of the owner
- */
-void init_dog(dog_t *d, char *name, float age, char *owner);
-
-/**
- * print_dog - prints information of a struct dog
- * @d: pointer to the struct dog to print
  *
- * Description: If d is NULL, nothing is printed.
- *              If d->name or d->owner is NULL, (nil) is printed instead.
+ * Return: pointer to the new dog, or NULL on failure
  */
-void print_dog(dog_t *d);
+dog_t *new_dog(char *name, float age, char *owner);
 
 #endif /* DOG_H */
