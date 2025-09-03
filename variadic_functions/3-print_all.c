@@ -8,6 +8,7 @@
  *
  * Description: Prints arguments separated by ", "
  *              Prints (nil) if a string is NULL
+ *              Ignores unknown formats
  */
 void print_all(const char * const format, ...)
 {
@@ -17,10 +18,9 @@ void print_all(const char * const format, ...)
 
 	va_start(args, format);
 
-	while (format != NULL && format[i] != '\0')
+	while (format && format[i])
 	{
-		if (format[i] == 'c' || format[i] == 'i' ||
-		    format[i] == 'f' || format[i] == 's')
+		if (format[i] == 'c' || format[i] == 'i' || format[i] == 'f' || format[i] == 's')
 		{
 			if (printed)
 				printf(", ");
@@ -31,10 +31,10 @@ void print_all(const char * const format, ...)
 				printf("%d", va_arg(args, int));
 			else if (format[i] == 'f')
 				printf("%f", va_arg(args, double));
-			else if (format[i] == 's')
+			else
 			{
 				str = va_arg(args, char *);
-				if (str == NULL)
+				if (!str)
 					printf("(nil)");
 				else
 					printf("%s", str);
