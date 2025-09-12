@@ -4,7 +4,7 @@
 #include <fcntl.h>
 
 /**
- * error_exit - prints an error message to stderr and exits with code
+ * error_exit - prints an error message to stderr and exits
  * @code: exit code
  * @msg: message format
  * @arg: argument to include in the message
@@ -41,14 +41,15 @@ int main(int argc, char *argv[])
 	fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fd_to == -1)
 	{
-		close(fd_from);
+		if (close(fd_from) == -1)
+			dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
 		error_exit(99, "Error: Can't write to %s\n", argv[2]);
 	}
 
 	while ((r_bytes = read(fd_from, buffer, 1024)) > 0)
 	{
 		w_bytes = write(fd_to, buffer, r_bytes);
-		if (w_bytes != r_bytes)
+		if (w_bytes != r_bytes || w_bytes == -1)
 		{
 			close(fd_from);
 			close(fd_to);
@@ -64,10 +65,10 @@ int main(int argc, char *argv[])
 	}
 
 	if (close(fd_from) == -1)
-		error_exit(100, "Error: Can't close fd %d\n", argv[1]);
+		error_exit(100, "Error: Can't close fd %d\n", fd_from);
 
 	if (close(fd_to) == -1)
-		error_exit(100, "Error: Can't close fd %d\n", argv[2]);
+		error_exit(100, "Error: Can't close fd %d\n", fd_to);
 
 	return (0);
 }
